@@ -1,0 +1,35 @@
+{
+    "benchmarks.TimeSPM.time_solve_SPM_CasadiSolver": {
+        "code": "class TimeSPM:\n    def time_solve_SPM_CasadiSolver(self):\n        solver = pb.CasadiSolver()\n        solver.solve(self.model, [0, 3600])\n\n    def setup(self):\n        model = pb.lithium_ion.SPM()\n        geometry = model.default_geometry\n    \n        # load parameter values and process model and geometry\n        param = model.default_parameter_values\n        param.process_model(model)\n        param.process_geometry(geometry)\n    \n        # set mesh\n        mesh = pb.Mesh(geometry, model.default_submesh_types, model.default_var_pts)\n    \n        # discretise model\n        disc = pb.Discretisation(mesh, model.default_spatial_methods)\n        disc.process_model(model)\n    \n        self.model = model",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeSPM.time_solve_SPM_CasadiSolver",
+        "number": 0,
+        "param_names": [],
+        "params": [],
+        "processes": 2,
+        "repeat": 0,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "4917db64f521061089675928d3a0471d50e03021aa15aa22d8fc27f56fd0d0b4",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeSPM.time_solve_SPM_ScipySolver": {
+        "code": "class TimeSPM:\n    def time_solve_SPM_ScipySolver(self):\n        solver = pb.ScipySolver()\n        solver.solve(self.model, [0, 3600])\n\n    def setup(self):\n        model = pb.lithium_ion.SPM()\n        geometry = model.default_geometry\n    \n        # load parameter values and process model and geometry\n        param = model.default_parameter_values\n        param.process_model(model)\n        param.process_geometry(geometry)\n    \n        # set mesh\n        mesh = pb.Mesh(geometry, model.default_submesh_types, model.default_var_pts)\n    \n        # discretise model\n        disc = pb.Discretisation(mesh, model.default_spatial_methods)\n        disc.process_model(model)\n    \n        self.model = model",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeSPM.time_solve_SPM_ScipySolver",
+        "number": 0,
+        "param_names": [],
+        "params": [],
+        "processes": 2,
+        "repeat": 0,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "9f7440795112dd08ff9f1d1ca58debdc479c369c8b428f8c43c61e2d7898c7f9",
+        "warmup_time": -1
+    },
+    "version": 2
+}
