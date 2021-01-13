@@ -1,0 +1,6 @@
+Benchmarks for [[https://github.com/pybamm-team/PyBaMM][PyBaMM]], to be run using [[https://github.com/airspeed-velocity/asv/][asv]].
+
+Benchmarks are located in the =benchmarks/= directory.
+
+The =gh-pages= branch contains the static website displaying the
+results. It is available at [[https://tlestang.github.io/pybamm-bench/][tlestang.github.io/pybamm-bench]].
