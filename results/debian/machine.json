@@ -1,9 +1,0 @@
-{
-    "arch": "x86_64",
-    "cpu": "Intel(R) Core(TM) i5-3470 CPU @ 3.20GHz",
-    "machine": "debian",
-    "num_cpu": "4",
-    "os": "Linux 4.19.0-13-amd64",
-    "ram": "16311656",
-    "version": 1
-}
