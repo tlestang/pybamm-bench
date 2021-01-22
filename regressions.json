@@ -1,1 +1,1 @@
-{"regressions": [["benchmarks.TimeSPM.time_solve_SPM_CasadiSolver", "graphs/branch-develop/machine-GitHubRunner/python-3.8/benchmarks.TimeSPM.time_solve_SPM_CasadiSolver.json", {}, null, 0.07523713799997722, 0.0383622675000197, [[6635, 6672, 0.0383622675000197, 0.07523713799997722]]]]}
+{"regressions": [["benchmarks.TimeSPM.time_solve_SPM_CasadiSolver", "graphs/branch-develop/machine-GitHubRunner/python-3.8/benchmarks.TimeSPM.time_solve_SPM_CasadiSolver.json", {}, null, 0.06852622949998022, 0.03537015449978753, [[null, 6639, 0.03537015449978753, 0.06852622949998022]]]]}
