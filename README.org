@@ -3,4 +3,4 @@ Benchmarks for [[https://github.com/pybamm-team/PyBaMM][PyBaMM]], to be run usin
 Benchmarks are located in the =benchmarks/= directory.
 
 The =gh-pages= branch contains the static website displaying the
-results. It is available at [[https://tlestang.github.io/pybamm-bench/][tlestang.github.io/pybamm-bench]].
+results. It is available at [[https://pybamm-team.github.io/pybamm-bench/][pybamm-team.github.io/pybamm-bench]].
