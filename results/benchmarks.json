@@ -1,8 +1,8 @@
 {
-    "benchmarks.TimeSPM.time_solve_SPM_CasadiSolver": {
-        "code": "class TimeSPM:\n    def time_solve_SPM_CasadiSolver(self):\n        solver = pb.CasadiSolver()\n        solver.solve(self.model, [0, 3600])\n\n    def setup(self):\n        model = pb.lithium_ion.SPM()\n        geometry = model.default_geometry\n    \n        # load parameter values and process model and geometry\n        param = model.default_parameter_values\n        param.process_model(model)\n        param.process_geometry(geometry)\n    \n        # set mesh\n        mesh = pb.Mesh(geometry, model.default_submesh_types, model.default_var_pts)\n    \n        # discretise model\n        disc = pb.Discretisation(mesh, model.default_spatial_methods)\n        disc.process_model(model)\n    \n        self.model = model",
+    "time_setup_models_and_sims.TimeBuildDFN.time_setup_DFN": {
+        "code": "class TimeBuildDFN:\n    def time_setup_DFN(self):\n        self.model = pybamm.lithium_ion.DFN()\n        self.param.process_model(self.model)\n        compute_discretisation(self.model, self.param).process_model(self.model)",
         "min_run_count": 2,
-        "name": "benchmarks.TimeSPM.time_solve_SPM_CasadiSolver",
+        "name": "time_setup_models_and_sims.TimeBuildDFN.time_setup_DFN",
         "number": 0,
         "param_names": [],
         "params": [],
@@ -12,13 +12,36 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "4917db64f521061089675928d3a0471d50e03021aa15aa22d8fc27f56fd0d0b4",
+        "version": "5f322e51e6b7e66125ee6949bdf25746005db467e8ffcfdcb3ace170e92bbc3d",
         "warmup_time": -1
     },
-    "benchmarks.TimeSPM.time_solve_SPM_ScipySolver": {
-        "code": "class TimeSPM:\n    def time_solve_SPM_ScipySolver(self):\n        solver = pb.ScipySolver()\n        solver.solve(self.model, [0, 3600])\n\n    def setup(self):\n        model = pb.lithium_ion.SPM()\n        geometry = model.default_geometry\n    \n        # load parameter values and process model and geometry\n        param = model.default_parameter_values\n        param.process_model(model)\n        param.process_geometry(geometry)\n    \n        # set mesh\n        mesh = pb.Mesh(geometry, model.default_submesh_types, model.default_var_pts)\n    \n        # discretise model\n        disc = pb.Discretisation(mesh, model.default_spatial_methods)\n        disc.process_model(model)\n    \n        self.model = model",
+    "time_setup_models_and_sims.TimeBuildDFNSimulation.time_setup_DFN_simulation": {
+        "code": "class TimeBuildDFNSimulation:\n    def time_setup_DFN_simulation(self, with_experiment):\n        self.model = pybamm.lithium_ion.DFN()\n        if with_experiment:\n            exp = pybamm.Experiment(\n                [\n                    \"Discharge at 0.1C until 3.105 V\",\n                ]\n            )\n            pybamm.Simulation(self.model, parameter_values=self.param, experiment=exp)\n        else:\n            pybamm.Simulation(self.model, parameter_values=self.param, C_rate=1)",
         "min_run_count": 2,
-        "name": "benchmarks.TimeSPM.time_solve_SPM_ScipySolver",
+        "name": "time_setup_models_and_sims.TimeBuildDFNSimulation.time_setup_DFN_simulation",
+        "number": 0,
+        "param_names": [
+            "param1"
+        ],
+        "params": [
+            [
+                "False",
+                "True"
+            ]
+        ],
+        "processes": 2,
+        "repeat": 0,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "8de44bc542fa7d4ba28a80f24414a9444b5436673aaebba674918f5f0bfd0ebb",
+        "warmup_time": -1
+    },
+    "time_setup_models_and_sims.TimeBuildSPM.time_setup_SPM": {
+        "code": "class TimeBuildSPM:\n    def time_setup_SPM(self):\n        self.model = pybamm.lithium_ion.SPM()\n        self.param.process_model(self.model)\n        compute_discretisation(self.model, self.param).process_model(self.model)",
+        "min_run_count": 2,
+        "name": "time_setup_models_and_sims.TimeBuildSPM.time_setup_SPM",
         "number": 0,
         "param_names": [],
         "params": [],
@@ -28,7 +51,138 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "9f7440795112dd08ff9f1d1ca58debdc479c369c8b428f8c43c61e2d7898c7f9",
+        "version": "0d0b3f5c67fc2da9a5794c66b70af5a45a09558d1ee95f738745385adb84fbca",
+        "warmup_time": -1
+    },
+    "time_setup_models_and_sims.TimeBuildSPMSimulation.time_setup_SPM_simulation": {
+        "code": "class TimeBuildSPMSimulation:\n    def time_setup_SPM_simulation(self, with_experiment):\n        self.model = pybamm.lithium_ion.SPM()\n        if with_experiment:\n            exp = pybamm.Experiment(\n                [\n                    \"Discharge at 0.1C until 3.105 V\",\n                ]\n            )\n            pybamm.Simulation(self.model, parameter_values=self.param, experiment=exp)\n        else:\n            pybamm.Simulation(self.model, parameter_values=self.param, C_rate=1)",
+        "min_run_count": 2,
+        "name": "time_setup_models_and_sims.TimeBuildSPMSimulation.time_setup_SPM_simulation",
+        "number": 0,
+        "param_names": [
+            "param1"
+        ],
+        "params": [
+            [
+                "False",
+                "True"
+            ]
+        ],
+        "processes": 2,
+        "repeat": 0,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "161220a99418ce4487cc29325cbae897f28d0e44ae07e1dfbfaac2cbc53a4ff9",
+        "warmup_time": -1
+    },
+    "time_setup_models_and_sims.TimeBuildSPMe.time_setup_SPMe": {
+        "code": "class TimeBuildSPMe:\n    def time_setup_SPMe(self):\n        self.model = pybamm.lithium_ion.SPMe()\n        self.param.process_model(self.model)\n        compute_discretisation(self.model, self.param).process_model(self.model)",
+        "min_run_count": 2,
+        "name": "time_setup_models_and_sims.TimeBuildSPMe.time_setup_SPMe",
+        "number": 0,
+        "param_names": [],
+        "params": [],
+        "processes": 2,
+        "repeat": 0,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "6083f5ff944353395eb4b21c97b02af555fe6528de3cd5283f5e139943945235",
+        "warmup_time": -1
+    },
+    "time_setup_models_and_sims.TimeBuildSPMeSimulation.time_setup_SPMe_simulation": {
+        "code": "class TimeBuildSPMeSimulation:\n    def time_setup_SPMe_simulation(self, with_experiment):\n        self.model = pybamm.lithium_ion.SPMe()\n        if with_experiment:\n            exp = pybamm.Experiment(\n                [\n                    \"Discharge at 0.1C until 3.105 V\",\n                ]\n            )\n            pybamm.Simulation(self.model, parameter_values=self.param, experiment=exp)\n        else:\n            pybamm.Simulation(self.model, parameter_values=self.param, C_rate=1)",
+        "min_run_count": 2,
+        "name": "time_setup_models_and_sims.TimeBuildSPMeSimulation.time_setup_SPMe_simulation",
+        "number": 0,
+        "param_names": [
+            "param1"
+        ],
+        "params": [
+            [
+                "False",
+                "True"
+            ]
+        ],
+        "processes": 2,
+        "repeat": 0,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "530563cb559427795e3648d9648df9250ae100b7721f69eec356bdda7798c55e",
+        "warmup_time": -1
+    },
+    "time_solve_models.TimeSolveDFN.time_solve_model": {
+        "code": "class TimeSolveDFN:\n    def time_solve_model(self, solve_first):\n        TimeSolveDFN.solver.solve(self.model, t_eval=self.t_eval)\n\n    def setup(self, solve_first):\n        self.model = pybamm.lithium_ion.DFN()\n        c_rate = 1\n        tmax = 4000 / c_rate\n        nb_points = 500\n        self.t_eval = np.linspace(0, tmax, nb_points)\n        prepare_model(self.model)\n        if solve_first:\n            solve_model_once(self.model, TimeSolveDFN.solver, self.t_eval)",
+        "min_run_count": 2,
+        "name": "time_solve_models.TimeSolveDFN.time_solve_model",
+        "number": 0,
+        "param_names": [
+            "param1"
+        ],
+        "params": [
+            [
+                "True",
+                "False"
+            ]
+        ],
+        "processes": 2,
+        "repeat": 0,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "914137228e20e5900cec36b0d3865f1faa2f5d479c7d6c2539514791f9ec4430",
+        "warmup_time": -1
+    },
+    "time_solve_models.TimeSolveSPM.time_solve_model": {
+        "code": "class TimeSolveSPM:\n    def time_solve_model(self, solve_first):\n        TimeSolveSPM.solver.solve(self.model, t_eval=self.t_eval)\n\n    def setup(self, solve_first):\n        self.model = pybamm.lithium_ion.SPM()\n        c_rate = 1\n        tmax = 4000 / c_rate\n        nb_points = 500\n        self.t_eval = np.linspace(0, tmax, nb_points)\n        prepare_model(self.model)\n        if solve_first:\n            solve_model_once(self.model, TimeSolveSPM.solver, self.t_eval)",
+        "min_run_count": 2,
+        "name": "time_solve_models.TimeSolveSPM.time_solve_model",
+        "number": 0,
+        "param_names": [
+            "param1"
+        ],
+        "params": [
+            [
+                "True",
+                "False"
+            ]
+        ],
+        "processes": 2,
+        "repeat": 0,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "ef1bb5f8d1ddfa59650e20438c4b252d73e5a062714848ce1d6d5269382bc598",
+        "warmup_time": -1
+    },
+    "time_solve_models.TimeSolveSPMe.time_solve_model": {
+        "code": "class TimeSolveSPMe:\n    def time_solve_model(self, solve_first):\n        TimeSolveSPMe.solver.solve(self.model, t_eval=self.t_eval)\n\n    def setup(self, solve_first):\n        self.model = pybamm.lithium_ion.SPMe()\n        c_rate = 1\n        tmax = 4000 / c_rate\n        nb_points = 500\n        self.t_eval = np.linspace(0, tmax, nb_points)\n        prepare_model(self.model)\n        if solve_first:\n            solve_model_once(self.model, TimeSolveSPMe.solver, self.t_eval)",
+        "min_run_count": 2,
+        "name": "time_solve_models.TimeSolveSPMe.time_solve_model",
+        "number": 0,
+        "param_names": [
+            "param1"
+        ],
+        "params": [
+            [
+                "True",
+                "False"
+            ]
+        ],
+        "processes": 2,
+        "repeat": 0,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "20672028872f4620ce85e909bae705d9490de441e926510b2b0e53ff0881d87b",
         "warmup_time": -1
     },
     "version": 2
